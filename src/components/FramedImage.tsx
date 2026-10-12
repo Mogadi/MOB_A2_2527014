@@ -9,9 +9,15 @@ type FramedImageProps = {
 
 export function FramedImage({ source, aspectRatio, label }: FramedImageProps) {
   return (
-    <View style={[styles.frame, { aspectRatio }]}>
-      <View style={styles.clip}>
-        <Image source={source} style={styles.image} resizeMode="cover" accessibilityLabel={label} />
+    <View style={styles.frame}>
+      <View style={styles.clip} collapsable={false}>
+        <Image
+          source={source}
+          style={[styles.image, { aspectRatio }]}
+          resizeMode="cover"
+          resizeMethod="resize"
+          accessibilityLabel={label}
+        />
       </View>
     </View>
   );
@@ -24,19 +30,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.terracotta,
     backgroundColor: colors.deep,
+    padding: 3,
   },
   clip: {
-    position: 'absolute',
-    top: 3,
-    right: 3,
-    bottom: 3,
-    left: 3,
+    width: '100%',
     borderRadius: 15,
     overflow: 'hidden',
     backgroundColor: colors.oliveSoft,
   },
   image: {
     width: '100%',
-    height: '100%',
+    borderRadius: 15,
   },
 });
