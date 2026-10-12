@@ -30,10 +30,10 @@ npm install
 npx expo start
 ```
 
-Android:
+Android development build:
 
 ```bash
-npx expo start --android
+npx expo run:android
 ```
 
 Web preview:
@@ -60,15 +60,16 @@ Physical-device results, including Airplane Mode, belong in `evidence/MOB_A2_252
 ## Release record
 
 - GitHub repository: https://github.com/Mogadi/MOB_A2_2527014
-- Final commit hash: record this from `git rev-parse HEAD` after the final commit
-- Release: tag `v1.0.0` and attach `MOB_A2_2527014.apk` and `MOB_A2_2527014_DEMO.mp4`
-- Release link and APK link: add the GitHub release URLs after the release is published
+- Release: https://github.com/Mogadi/MOB_A2_2527014/releases/tag/v1.0.0
+- APK: https://github.com/Mogadi/MOB_A2_2527014/releases/download/v1.0.0/MOB_A2_2527014.apk
+- The release APK is a standalone arm64 build. It includes the JavaScript bundle and opens without Expo Go.
+- Demonstration video: `MOB_A2_2527014_DEMO.mp4` is recorded on a phone and attached to the same release. It is not stored in this repository.
 
 ## Known limitations
 
 - Project descriptions are student backend work. Replace them in `src/data/portfolio.ts` if the final titles differ.
-- The APK is produced by EAS Build on your Expo account. This repository does not contain the APK.
-- The demonstration video is recorded on a physical phone after the APK is installed.
+- The APK is attached to the GitHub release. This repository does not contain the APK binary.
+- The demonstration video has to be recorded on a physical phone. It must be continuous, unedited, and no longer than two minutes.
 - Optional website links need a connection. The rest of the portfolio does not.
 
 ## Repository evidence
