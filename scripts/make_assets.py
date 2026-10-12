@@ -5,10 +5,28 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path("/home/muhammad/Downloads/Uni/Individual_app/assets")
-SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
-SANS = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-SANS_REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+ROOT = Path(__file__).resolve().parents[1] / "assets"
+
+
+def first_existing(*paths: str) -> str:
+    for path in paths:
+        if Path(path).exists():
+            return path
+    raise FileNotFoundError("None of the expected fonts were found.")
+
+
+SERIF = first_existing(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+    r"C:\Windows\Fonts\georgiab.ttf",
+)
+SANS = first_existing(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    r"C:\Windows\Fonts\segoeuib.ttf",
+)
+SANS_REG = first_existing(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    r"C:\Windows\Fonts\segoeui.ttf",
+)
 
 INK = (3, 7, 14, 255)
 PAPER = (3, 7, 14, 255)
@@ -65,9 +83,8 @@ def avatar() -> Image.Image:
     size = 900
     image = Image.new("RGBA", (size, size), INK)
     draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 0, size, 22), fill=TERRACOTTA)
-    centered(draw, "MOHH", font(SERIF, 150), (40, 70, size - 40, 340), CREAM)
-    centered(draw, "BACKEND", font(SANS, 34), (40, 340, size - 40, 450), TERRACOTTA)
+    centered(draw, "MOHH", font(SERIF, 148), (48, 250, size - 48, 520), CREAM)
+    centered(draw, "BACKEND", font(SANS, 36), (48, 500, size - 48, 640), TERRACOTTA)
     return image
 
 

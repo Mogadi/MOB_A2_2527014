@@ -1,4 +1,5 @@
-import { Image, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FramedImage } from '../components/FramedImage';
 import { Screen } from '../components/Screen';
 import { SectionHeading } from '../components/SectionHeading';
 import { useProfile } from '../context/ProfileContext';
@@ -25,10 +26,10 @@ export function AboutScreen() {
       <View style={styles.cardPreview}>
         <Text style={styles.label}>Verification card preview</Text>
         {profile.verificationCardUri ? (
-          <Image
+          <FramedImage
             source={{ uri: profile.verificationCardUri }}
-            style={styles.cardImage}
-            accessibilityLabel="Verification card image preview"
+            aspectRatio={4 / 3}
+            label="Verification card image preview"
           />
         ) : (
           <View style={styles.emptyCard}>
@@ -103,12 +104,6 @@ const styles = StyleSheet.create({
   },
   cardPreview: {
     gap: spacing.sm,
-  },
-  cardImage: {
-    width: '100%',
-    aspectRatio: 4 / 3,
-    borderRadius: 16,
-    backgroundColor: colors.line,
   },
   emptyCard: {
     borderRadius: 16,

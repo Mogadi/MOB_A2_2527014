@@ -1,5 +1,6 @@
-import { Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ImageSourcePropType, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, spacing } from '../theme/colors';
+import { FramedImage } from './FramedImage';
 
 type ImageSlotProps = {
   title: string;
@@ -30,7 +31,7 @@ export function ImageSlot({
     <View style={styles.wrap}>
       <Text style={styles.title}>{title}</Text>
       {source ? (
-        <Image source={source} style={[styles.preview, { aspectRatio }]} accessibilityLabel={`${title} preview`} />
+        <FramedImage source={source} aspectRatio={aspectRatio} label={`${title} preview`} />
       ) : (
         <View style={[styles.empty, { aspectRatio }]}>
           <Text style={styles.emptyText}>{emptyText}</Text>
@@ -72,11 +73,6 @@ const styles = StyleSheet.create({
     color: colors.ink,
     fontSize: 18,
     fontWeight: '700',
-  },
-  preview: {
-    width: '100%',
-    borderRadius: 12,
-    backgroundColor: colors.oliveSoft,
   },
   empty: {
     width: '100%',

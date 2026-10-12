@@ -80,8 +80,16 @@ export async function copyIntoAppStorage(sourceUri: string, fileName: string): P
   if (!existing.exists) {
     await FileSystem.makeDirectoryAsync(folder, { intermediates: true });
   }
-  const destination = `${folder}${fileName}`;
-  await FileSystem.deleteAsync(destination, { idempotent: true });
+  const dot = fileName.lastIndexOf('.');
+  const stem = dot > 0 ? fileName.slice(0, dot) : fileName;
+  const extension = dot > 0 ? fileName.slice(dot) : '';
+  const names = await FileSystem.readDirectoryAsync(folder);
+  await Promise.all(
+    names
+      .filter((name) => name === fileName || name.startsWith(`${stem}-`))
+      .map((name) => FileSystem.deleteAsync(`${folder}${name}`, { idempotent: true })),
+  );
+  const destination = `${folder}${stem}-${Date.now()}${extension}`;
   await FileSystem.copyAsync({ from: sourceUri, to: destination });
   return destination;
 }

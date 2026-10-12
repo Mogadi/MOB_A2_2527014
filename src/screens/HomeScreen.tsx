@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { FramedImage } from '../components/FramedImage';
 import { OfflineNote } from '../components/OfflineNote';
 import { Screen } from '../components/Screen';
 import { useProfile } from '../context/ProfileContext';
@@ -14,7 +15,7 @@ export function HomeScreen() {
     <Screen>
       <Text style={styles.introduction}>{student.introduction}</Text>
       <View style={styles.hero}>
-        <Image source={portrait} style={styles.portrait} accessibilityLabel="Profile image" />
+        <FramedImage source={portrait} aspectRatio={1} label="Profile image" />
         <View style={styles.heroCopy}>
           <Text style={styles.appName}>{student.appName}</Text>
           <Text style={styles.headline}>{profile.headline}</Text>
@@ -54,12 +55,6 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     padding: spacing.md,
     gap: spacing.md,
-  },
-  portrait: {
-    width: '100%',
-    aspectRatio: 1.55,
-    borderRadius: 16,
-    backgroundColor: colors.olive,
   },
   heroCopy: {
     gap: spacing.sm,

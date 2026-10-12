@@ -1,0 +1,49 @@
+name: Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate the Android project
+        run: npx expo prebuild --platform android --non-interactive
+        env:
+          EXPO_NO_TELEMETRY: "1"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Build a standalone release APK
+        working-directory: android
+        run: |
+          ./gradlew assembleRelease --no-daemon \
+            -Pandroid.injected.signing.store.file="$PWD/app/debug.keystore" \
+            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.key.alias=androiddebugkey \
+            -Pandroid.injected.signing.key.password=android
+          test -f app/build/outputs/apk/release/app-release.apk
+          unzip -l app/build/outputs/apk/release/app-release.apk | grep -E 'index.android.bundle|assets/index'
+
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOB_A2_2527014
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
