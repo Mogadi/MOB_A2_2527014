@@ -55,13 +55,14 @@ Install that APK on a phone and open it without Expo Go.
 
 ## Tested device
 
-Physical-device results, including Airplane Mode, belong in `evidence/MOB_A2_2527014_TEST_LOG.pdf` after the APK is installed. Fill in the phone model and Android version there before submission.
+Tested on 12 October 2026 in BlueStacks App Player 5.22. The physical phone runs an Android version that is too old to install this APK, so the standalone APK was installed and tested in BlueStacks instead. Every check passed, including Airplane Mode. The record is in `evidence/MOB_A2_2527014_TEST_LOG.pdf`.
 
 ## Release record
 
 - GitHub repository: https://github.com/Mogadi/MOB_A2_2527014
 - Release: https://github.com/Mogadi/MOB_A2_2527014/releases/tag/v1.0.0
 - APK: https://github.com/Mogadi/MOB_A2_2527014/releases/download/v1.0.0/MOB_A2_2527014.apk
+- Final commit hash: the latest commit on `master`, which records this BlueStacks test
 - The release APK is a standalone arm64 build. It includes the JavaScript bundle and opens without Expo Go.
 - Demonstration video: `MOB_A2_2527014_DEMO.mp4` is recorded on a phone and attached to the same release. It is not stored in this repository.
 

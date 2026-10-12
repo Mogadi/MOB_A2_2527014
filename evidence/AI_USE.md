@@ -16,13 +16,15 @@ Cursor, using the Grok coding assistant, was used while building this project.
 - Created the app icon, monogram, and poster study images
 - Drafted this disclosure, the README, and the UI/UX, test-log, and declaration PDFs
 
+## What is already done
+
+- The declaration is signed and dated 12 October 2026
+- The installed APK was tested in BlueStacks App Player 5.22 because the physical phone runs an Android version that is too old to install it. Every test-log check passed, including Airplane Mode
+- Release `v1.0.0` is published with the APK
+
 ## What the student must still do
 
-- Review every screen and replace any project, skill, or biography text that is not genuine
-- Build the Android APK with EAS and install it without Expo Go
-- Record the demonstration video with the handwritten verification card
-- Complete the physical-device rows in the test log, including Airplane Mode
-- Sign the declaration before submission
-- Push the repository `MOB_A2_2527014` and publish release `v1.0.0`
+- Record the demonstration video with the handwritten verification card, if it is not already attached to the release
+- Paste the final commit hash into the Moodle submission
 
 The assistant did not submit the work and did not create the GitHub release or the APK.

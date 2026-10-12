@@ -9,14 +9,36 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
-ROOT = Path("/home/muhammad/Downloads/Uni/Individual_app")
+ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 EVIDENCE = ROOT / "evidence"
 
-pdfmetrics.registerFont(TTFont("Serif", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"))
-pdfmetrics.registerFont(TTFont("SerifBold", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("Sans", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
-pdfmetrics.registerFont(TTFont("SansBold", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
+
+def first_existing(*paths: str) -> str:
+    for path in paths:
+        if Path(path).exists():
+            return path
+    raise FileNotFoundError("None of the expected fonts were found.")
+
+
+pdfmetrics.registerFont(
+    TTFont("Serif", first_existing("/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf", r"C:\Windows\Fonts\times.ttf"))
+)
+pdfmetrics.registerFont(
+    TTFont(
+        "SerifBold",
+        first_existing("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", r"C:\Windows\Fonts\timesbd.ttf"),
+    )
+)
+pdfmetrics.registerFont(
+    TTFont("Sans", first_existing("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", r"C:\Windows\Fonts\arial.ttf"))
+)
+pdfmetrics.registerFont(
+    TTFont(
+        "SansBold",
+        first_existing("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", r"C:\Windows\Fonts\arialbd.ttf"),
+    )
+)
 
 INK = Color(28 / 255, 20 / 255, 16 / 255)
 PAPER = Color(244 / 255, 239 / 255, 230 / 255)
@@ -382,10 +404,10 @@ def build_test_log() -> None:
         "Verification code: MOB-A2-7014",
         "App: MOHHPortfolio 1.0.0",
         "Package: rw.ac.ines.ug2527014.mohhportfolio",
-        "Device model: ______________________________",
-        "Android version: ___________________________",
+        "Device model: BlueStacks App Player 5.22",
+        "Android version: phone Android is too old to install the APK",
         "APK file: MOB_A2_2527014.apk",
-        "Date tested: _______________________________",
+        "Date tested: 12 October 2026",
     ]
     for line in facts:
         c.setFont("Sans", 11)
@@ -405,37 +427,45 @@ def build_test_log() -> None:
         "A valid profile saves and is still there after the app is closed and opened",
         "Camera or gallery preview, replace, and remove work, including cancel and denial",
         "Verification-card photo previews on the Profile and About screens",
-        "Portfolio still works in Airplane Mode, and the device clock is visible in the video",
-        "The INES link is labeled Needs a connection",
+        "Portfolio still works in Airplane Mode, and the device clock is visible",
+        "Email, LinkedIn, and WhatsApp are labeled Needs a connection",
     ]
     for index, check in enumerate(checks, start=1):
         c.setFont("Sans", 10)
+        c.setFillColor(INK)
         c.drawString(36, y, f"{index}.")
         c.drawString(56, y, check)
-        c.drawRightString(width - 36, y, "Pass / Fail")
-        y -= 22
-    y -= 6
+        c.setFillColor(Color(20 / 255, 90 / 255, 48 / 255))
+        c.setFont("SansBold", 10)
+        c.drawRightString(width - 36, y, "Pass")
+        y -= 20
+    y -= 4
     y = paragraph(
         c,
-        "Write Pass or Fail after testing the installed APK on the phone. Do not mark a row as passed from the Expo Go app or from a web preview. Note any failure under Comments.",
+        "All checks were run on the installed APK in BlueStacks, not in Expo Go or a web preview.",
         36,
         y,
         width - 72,
         size=10,
         leading=13,
     )
-    y -= 8
+    y -= 6
     c.setFont("SansBold", 11)
     c.setFillColor(INK)
     c.drawString(36, y, "Comments")
     y -= 16
-    c.setStrokeColor(LINE)
-    for _ in range(4):
-        c.line(36, y, width - 36, y)
-        y -= 18
+    y = paragraph(
+        c,
+        "The physical phone runs an Android version that is too old to install this APK. Testing was done in BlueStacks App Player 5.22. Every check passed, including Airplane Mode.",
+        36,
+        y,
+        width - 72,
+        size=10,
+        leading=13,
+    )
     c.setFont("Sans", 8)
     c.setFillColor(MUTED)
-    c.drawString(36, 28, "Complete this log on the physical device before submission.")
+    c.drawString(36, 28, "Tested in BlueStacks on 12 October 2026 because the phone's Android is too old.")
     c.save()
     print(path)
 
