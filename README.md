@@ -44,7 +44,7 @@ npx expo start --web
 
 ## EAS build
 
-The preview profile in `eas.json` produces an installable Android APK.
+The preview profile in `eas.json` produces an installable Android APK on an Expo account.
 
 ```bash
 npx eas-cli login
@@ -59,8 +59,8 @@ Physical-device results, including Airplane Mode, belong in `evidence/MOB_A2_252
 
 ## Release record
 
+- GitHub repository: https://github.com/Mogadi/MOB_A2_2527014
 - Final commit hash: record this from `git rev-parse HEAD` after the final commit
-- GitHub repository: `MOB_A2_2527014`
 - Release: tag `v1.0.0` and attach `MOB_A2_2527014.apk` and `MOB_A2_2527014_DEMO.mp4`
 - Release link and APK link: add the GitHub release URLs after the release is published
 
