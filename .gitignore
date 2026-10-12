@@ -39,3 +39,15 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# release binaries stay on the GitHub release, not in the repository
+*.apk
+*.aab
+*.mp4
+
+# local assignment brief
+3409_Assignment_2_Mobile_Application_Development by MClement.pdf
+
+# local tooling
+.venv/
+.pydeps/

@@ -1,25 +1,41 @@
 {
   "expo": {
-    "name": "mohh-scaffold",
-    "slug": "mohh-scaffold",
+    "name": "MOHHPortfolio",
+    "slug": "mohh-portfolio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "rw.ac.ines.ug2527014.mohhportfolio"
     },
     "android": {
+      "package": "rw.ac.ines.ug2527014.mohhportfolio",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#1C1410",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CAMERA",
+        "READ_MEDIA_IMAGES"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MOHHPortfolio uses your photo library only to attach a profile or verification-card image stored on this phone.",
+          "cameraPermission": "MOHHPortfolio uses the camera only to capture a profile or verification-card image stored on this phone."
+        }
+      ],
+      "expo-image"
+    ]
   }
 }
